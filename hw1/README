@@ -1,0 +1,17 @@
+Requirements: 
+python 3 (written and tested in 3.3)
+pillow 2.3.0 (https://pypi.python.org/pypi/Pillow/)
+
+Usage: kmeans.py path_in n_centers [path_out [fmt]]
+
+The script must be provided with the path to an image and a number of
+cluster centers. If path_out is provided, the script writes the result
+to that location, and if fmt is a valid image type, then it writes the
+result as that image type. If fmt is not provided, it attempts to use
+the extension of the original file that was provided. If neither are
+provided, it displays the new image to the user.
+
+For ease of use, the script "show (small)|(large) k" can also be run
+in the root directory, which will display either mandrill-small.tiff
+or mandrill-large.tiff after being processed by the kmeans algorithm
+for k cluster centers.

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+EXEC=code/kmeans.py
+CC=python3
+
+if [ "$#" -eq 2 ]; then
+	${CC} ${EXEC} input/mandrill-$1.tiff $2
+else 
+	echo "Bad arguments."
+fi

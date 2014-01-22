@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{algpseudocode}
+
+\begin{document}
+\title{Homework 1 - CMSC-25400}
+\author{Patrick Collins}
+\date{\today}
+\maketitle
+
+\section{Proofs}
+\begin{enumerate}
+\item Derive an algorithm that can learn any monotone conjunction over
+  ${0, 1}^n$ with a mistake bound of $n$. \\
+
+\begin{algorithm*}
+\caption{Elimination for Monotone Conjunctions}
+\begin{algorithmic}[1]
+\State $C = {}$ 
+\State $f = \bigvee_{i=1}^{|C|} C$
+\State $t \gets 1$
+\while{True}
+\State predict $\hat{y}^t = f(x^t)$
+\If{$((\hat{y}^t == 0)$ and $(y^t == 1))$}
+\State add ${x | x \in x^t if x == 0}$ to $C$.
+\EndIf
+\State $t \gets t + 1$
+\EndWhile
+\end{algorithmic}

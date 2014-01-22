@@ -35,3 +35,11 @@ nosetests.xml
 .project
 .pydevproject
 /hw1/code/kmeans.py~
+/hw1/code/metricData.csv
+/hw1/code/metricData.sql
+/hw1/code/tests.py~
+/hw1/metricData.csv
+/hw1/metricData.sql
+/hw1/show~
+/hw1/README~
+/hw1/writeup/hw1.tex~

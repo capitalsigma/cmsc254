@@ -119,7 +119,7 @@ class VectorQuantize:
         (self.new_image if show_new else self.old_image).show()
     
     def write(self, path, fmt=None):
-        self.new_image.save(path, fmt)
+        self.new_image.save(open(path, 'wb'), fmt)
 
 
 def main():
@@ -134,9 +134,10 @@ def main():
     vc.execute()
 
     if(len(argv) > 3):
-        vc.write(argv[3], argv[4] if len(argv) == 5 else None)
+        vc.write(argv[3], argv[4] if len(argv) == 5 else "tiff")
     else:
         vc.show()
+    print("Done for invocation with args", argv[1:])
 
 if __name__ == '__main__':
     main()

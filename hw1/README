@@ -8,10 +8,28 @@ The script must be provided with the path to an image and a number of
 cluster centers. If path_out is provided, the script writes the result
 to that location, and if fmt is a valid image type, then it writes the
 result as that image type. If fmt is not provided, it attempts to use
-the extension of the original file that was provided. If neither are
-provided, it displays the new image to the user.
+the .tiff. If neither are provided, it displays the new image to the
+user.
 
 For ease of use, the script "show (small)|(large) k" can also be run
 in the root directory, which will display either mandrill-small.tiff
 or mandrill-large.tiff after being processed by the kmeans algorithm
 for k cluster centers.
+
+Implementation:
+
+The algorithm has been implemented using a Py3k fork of the Python
+Imaging Library called Pillow. The image is read into a list of list
+of tuples of ints, the kmeans algorithm is run for either 30
+iterations or convergence (whichever comes first), the resulting
+tuples are rounded from floats back to ints, a copy of the original
+file is made, and it is overwritten pixel-by-pixel with the new
+data. The initial cluster centers are chosen using the Python standard
+library function random.choice(). 
+
+After talking to Professor Kondor in office hours, I opted not to
+implement part (c) of question 4, since the algorithm completes in a
+reasonable amount of time for the large image (on the order of 10
+minutes), and writing it in to the program would have involved
+unnecessary refactoring.
+

@@ -57,33 +57,34 @@ M(A)$, i.e. the mistake bound of $A'$ is bounded from above by the mistake bound
 Lemma 1: After any sequence of inputs, $C(A)$ contains at least as many
 incorrect hypotheses as $C(A')$, and both contain the true hypothesis.
 
-Proof: Suppose, for contradiction, that there exists some hypothesis $f \in
-C(A), f \not\in C(A')$. Then either $f$ is consistent with the input
-that both algorithms have processed so far, or it is not. If it is not
-consistent, then $A$ has more incorrect hypotheses in the concept
-class it is currently considering, which is what we wanted to show. If
-$f$ is consistent with the input processed so far, then $A'$ would
-have never removed it from its concept class, a contradiction. 
+Proof: Suppose, for contradiction, that there exists some hypothesis
+$f \in C(A), f \not\in C(A')$. Then either $f$ is consistent with the
+input that both algorithms have processed so far, or it is not. If it
+is not consistent, then $C(A)$ has more incorrect hypotheses than
+$C(A')$, which is what we wanted to show. If $f$ is consistent with
+the input processed so far, then $A'$ would have never removed it from
+$C(A')$, a contradiction.
 
 Alternatively, suppose, for contradiction, that there is some $f
-\not\in C(A), f \in C(A')$. $A'$ removes inconsistent hypotheses from its
-concept class, so $f$ must be consistent with the input seen so
+\not\in C(A), f \in C(A')$. $A'$ removes inconsistent hypotheses from
+its concept class, so $f$ must be consistent with the input seen so
 far. But then $f$ could be the correct hypothesis, and if $A$ had
 removed the correct hypothesis from its concept class, then it would
-make infinitely many mistakes, a contradiction. 
+make infinitely many mistakes, a contradiction.
 
-Proof of claim: 
-The mistakes that any algorithm makes is bounded from
+Proof of main claim: The mistakes that any algorithm makes is bounded from
 above by the number of incorrect hypotheses in the concept class its
 considering, so, the fact that $C(A') \leq C(A)$ over any sequence of
-inputs by lemma 1 implies that $M(A') \leq M(A)$ for any sequence of inputs, which is what we wanted to show. $\blacksquare$
+inputs by lemma 1 implies that $M(A') \leq M(A)$ for any sequence of
+inputs, which is what we wanted to show. Hence $A'$ has a mistake
+bound of $M$ over $C$. $\blacksquare$
 
 \item Prove that $cost_{IC} = 2cost_{avg^2}$
 
-Beginning with the simpler case of a single cluster center:
+Beginning with the simple case of a single cluster center:
 
 \begin{align*}
-  cost_{IC} &= \frac 1 {|C|} \sum\limits_{x} \sum\limits_{x'} (x - x')^2\\
+  cost_{IC}(C) &= \frac 1 {|C|} \sum\limits_{x} \sum\limits_{x'} (x - x')^2\\
   &= \frac 1 {|C|} \sum\limits_{x} \sum\limits_{x'} ||x - x'||\\
   &= \frac 1 {|C|} \sum\limits_{x} \sum\limits_{x'} (x^T - x'^T)(x - x')\\
   &= \frac 1 {|C|} \sum\limits_{x} \sum\limits_{x'} (x^Tx - x^Tx' - x'^Tx + x'^Tx')\\
@@ -119,7 +120,7 @@ that
 We have:
 
 \begin{align*}
-  cost_{avg^2} &= \sum\limits_{x} d(x, \frac {\sum\limits_{x'} x'} {|C|})^2\\
+  cost_{avg^2}(C) &= \sum\limits_{x} d(x, \frac {\sum\limits_{x'} x'} {|C|})^2\\
   &= \sum\limits_{x} ||x - \frac {\sum\limits_{x'} x'} {|C|}||^2\\
   &= \sum\limits_{x} (x - \frac {\sum\limits_{x'} x'} {|C|})^T (x - \frac {\sum\limits_{x'} x'} {|C|})\\
     &= \sum\limits_{x} (x^Tx - x^T \frac {\sum\limits_{x'} x'} {|C|} - \frac {\sum\limits_{x'} x'} {|C|}^Tx + \frac {\sum\limits_{x'} x'} {|C|}^T \frac {\sum\limits_{x'} x'} {|C|})\\
@@ -134,9 +135,9 @@ do not depend on how many other clusters there are, we can simply add
 back in the summation on $k$, and get:
 
 \begin{align*}
-  cost_{IC} &= \sum\limits_i^k 2(\sum\limits_{x \in C_i} x^Tx - \frac 1 {|C_i|} \sum\limits_{x \in C_i} x^T \sum\limits_{x \in C_i} x)\\
+  cost_{IC}(C_0 \cup C_1,\dots,\cup C_k) &= \sum\limits_i^k 2(\sum\limits_{x \in C_i} x^Tx - \frac 1 {|C_i|} \sum\limits_{x \in C_i} x^T \sum\limits_{x \in C_i} x)\\
   &= 2\sum\limits_i^k(\sum\limits_{x \in C_i} x^Tx - \frac 1 {|C_i|} \sum\limits_{x \in C_i} x^T \sum\limits_{x \in C_i} x)\\
-  cost_{avg^2} &= \sum\limits_i^k(\sum\limits_{x} x^Tx - \frac 1 {|{x \in C_i}|} \sum\limits_{x} x^T \sum\limits_{x} x)
+  cost_{avg^2}(C_0 \cup C_1,\dots,\cup C_k) &= \sum\limits_i^k(\sum\limits_{x} x^Tx - \frac 1 {|{x \in C_i}|} \sum\limits_{x} x^T \sum\limits_{x} x)
 \end{align*}
 
 $\blacksquare$
